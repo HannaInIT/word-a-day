@@ -76,11 +76,15 @@ word-a-day/
 ├── 📁 src/                # Source code
 │   ├── ⚡ app.js           # Main application
 │   ├── 🔧 constants.js    # App constants
+│   ├── ⚙️ config.js       # Environment configuration
 │   ├── 📁 pages/          # Page controllers
 │   ├── 📁 services/       # API services
 │   └── 📁 views/          # UI components
 ├── 📁 data/               # Static data
 │   └── 📋 english_words.json
+├── 📄 .env.example        # Environment variables template
+├── 🚫 .env               # Your API keys (not in git)
+├── 🚫 .gitignore         # Git ignore rules
 └── 📄 package.json        # Dependencies
 ```
 
@@ -102,17 +106,30 @@ word-a-day/
 
 ## 🔐 API Configuration
 
-### Setting up your own Unsplash API Key
+### Environment Variables Setup
 
-The project currently uses a demo API key. For production use:
+1. **Copy environment template**:
 
-1. **Register** at [Unsplash Developers](https://unsplash.com/developers)
-2. **Create** a new application
-3. **Copy** your Access Key
-4. **Update** `/src/services/imageService.js`:
-   ```javascript
-   const UNSPLASH_ACCESS_KEY = "YOUR_ACCESS_KEY_HERE";
+   ```bash
+   cp .env.example .env
    ```
+
+2. **Get Unsplash API Key**:
+   - Register at [Unsplash Developers](https://unsplash.com/developers)
+   - Create a new application
+   - Copy your Access Key
+
+3. **Update your `.env` file**:
+   ```bash
+   UNSPLASH_ACCESS_KEY=your_actual_key_here
+   ```
+
+### For Production Deployment
+
+**Netlify**: Add environment variables in Site Settings → Environment Variables
+**Other hosts**: Set `VITE_UNSPLASH_ACCESS_KEY` in your hosting platform
+
+> **Note**: The project includes a fallback demo key for testing, but it has rate limits.
 
 ## 🛠️ Technologies Used
 
@@ -120,13 +137,6 @@ The project currently uses a demo API key. For production use:
 - **APIs**: Dictionary API, Unsplash API
 - **Deployment**: Netlify
 - **Development**: Prettier (code formatting)
-
-## 📱 Browser Support
-
-- ✅ Chrome 60+
-- ✅ Firefox 55+
-- ✅ Safari 12+
-- ✅ Edge 79+
 
 ## 🤝 Contributing
 
@@ -137,15 +147,5 @@ Contributions are welcome! Feel free to:
 3. 💾 Commit changes (`git commit -m 'Add amazing feature'`)
 4. 📤 Push to branch (`git push origin feature/amazing-feature`)
 5. 🔀 Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the ISC License - see the [package.json](package.json) file for details.
-
-## 👤 Author
-
-**Hanna** - [HannaInIT](https://github.com/HannaInIT)
-
----
 
 _Built with ❤️ for English language learners_

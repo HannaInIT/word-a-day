@@ -1,14 +1,12 @@
+import { config } from "../config.js";
+
 export async function fetchWordImage(word) {
   try {
-    const response = await fetch(
-      `https://api.unsplash.com/search/photos?query=${word}`,
-      {
-        headers: {
-          Authorization:
-            "Client-ID cWn8NA7LbX4dFyr50jHT2syLplZeI8cVwBSDtwSE8b4",
-        },
-      }
-    );
+    const response = await fetch(`${config.UNSPLASH_API_URL}?query=${word}`, {
+      headers: {
+        Authorization: `Client-ID ${config.UNSPLASH_ACCESS_KEY}`,
+      },
+    });
     const responseData = await response.json();
 
     return responseData.results[0].urls.full;

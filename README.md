@@ -52,9 +52,6 @@ _Here, you can learn at your own pace — one word a day or as many as you want.
 3. **Open locally**
 
    ```bash
-   # Using Python
-   python -m http.server 8000
-
    # Using Node.js
    npx serve .
 
@@ -62,7 +59,7 @@ _Here, you can learn at your own pace — one word a day or as many as you want.
    # Right-click index.html → "Open with Live Server"
    ```
 
-4. **Visit** `http://localhost:8000` in your browser
+4. **Visit** the URL shown in your terminal (usually `http://localhost:3000` or `http://localhost:5000`) in your browser
 
 ## 🏗️ Project Structure
 

@@ -10,8 +10,6 @@ import { initRandomWordPage } from "../pages/randomWordPage.js";
 import { fetchWordImage } from "../services/imageService.js";
 
 export function initMainLayout() {
-  const backgroundImage = createBackgroundImage();
-  document.body.prepend(backgroundImage);
   const userInterface = document.getElementById(USER_INTERFACE_ID);
   const header = createHeader();
   userInterface.appendChild(header);
@@ -21,20 +19,12 @@ export function initMainLayout() {
   userInterface.appendChild(main);
 }
 
-export function createBackgroundImage() {
-  const backgroundImage = document.createElement("img");
-  backgroundImage.src = "/public/images/app_img.png";
-  backgroundImage.alt = "background image";
-  backgroundImage.classList.add("background-img");
-  return backgroundImage;
-}
-
 export function createHeader() {
   const header = document.createElement("header");
   header.classList.add("header");
 
   const logo = document.createElement("img");
-  logo.src = "/public/images/logo.png";
+  logo.src = "/public/images/logo.svg";
   logo.alt = "Logo";
   logo.classList.add(CLASS_LOGO);
 

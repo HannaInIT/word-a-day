@@ -127,7 +127,7 @@ textarea:not([rows]) {
 
 /* Body */
 body {
-  background-color: #e4e6f0;
+  background: linear-gradient(to bottom, #d6affe 0%, #9f7ad8 55%, #442256 100%);
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -192,7 +192,7 @@ body {
 }
 
 .logo {
-  height: 40px;
+  height: 45px;
   width: auto;
 }
 

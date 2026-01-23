@@ -12,17 +12,23 @@ import {
 export const createHomeElement = () => {
   const element = document.createElement("div");
   element.classList.add(CLASS_HOME_BOX);
-  element.innerHTML = String.raw`
-  <h1>Word a Day</h1>
-    <h2>Consistency matters more than speed</h2>
-    <div class="${CLASS_PARAGRAPH_WRAPPER}">
-      <p>Trying to learn English fast?</p>
-      <p>We often overestimate what we can do in a day and underestimate what we can achieve over time.</p>
-      <p>Learning one word a day is a small step — but over time, it leads to big results. Here, you're free to go at your own pace.</p>
-      <p>Learn one word a day — or as many as you like.</p>
-      <p>Ready to start?</p>
-      </div>
-      <button id="${START_LEARNING_BUTTON_ID}">Start learning</button>
+  element.innerHTML = String.raw`  
+  <div class="home-image-container">
+    <img src="./public/images/home_img.png" alt="home image" class="home-image"/>
+  </div>
+
+  <div class="home-content-container">
+   <div class="home-text"> 
+    <h1>EXPLORE THE WORLD OF</h1>  
+    <h2>ENGLISH</h2>
+    <span>through daily word discovery</span>
+   </div>
+   
+    <button id="${START_LEARNING_BUTTON_ID}">START</button>
+    </div>
+ 
+
+   
   `;
   return element;
 };

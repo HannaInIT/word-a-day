@@ -95,40 +95,28 @@ textarea:not([rows]) {
 /* S T Y L E S   F O R   P R O J E C T*/
 
 /* Fonts */
-.poppins-regular {
-  font-family: "Poppins", sans-serif;
+.poly-regular {
+  font-family: "Poly", serif;
   font-weight: 400;
   font-style: normal;
 }
 
-.poppins-bold {
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.unna-regular {
-  font-family: "Unna", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.unna-bold {
-  font-family: "Unna", serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.unna-regular-italic {
-  font-family: "Unna", serif;
+.poly-regular-italic {
+  font-family: "Poly", serif;
   font-weight: 400;
   font-style: italic;
+}
+
+.ribeye-marrow-regular {
+  font-family: "Ribeye Marrow", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 /* Body */
 body {
   background: linear-gradient(to bottom, #d6affe 0%, #9f7ad8 55%, #442256 100%);
-  font-family: "Poppins", sans-serif;
+  font-family: "Poly", serif;
   font-weight: 400;
   font-style: normal;
   font-size: 18px;
@@ -142,7 +130,6 @@ body {
 }
 
 /* App */
-
 .background-img {
   background-size: cover;
   background-position: center;
@@ -160,7 +147,7 @@ body {
   max-width: 1287px;
   width: 100%;
   margin: 0 auto;
-  padding: 20px;
+  padding: 30px;
   background-color: rgba(255, 255, 255, 0.8);
   display: flex;
   flex-direction: column;
@@ -183,10 +170,9 @@ body {
 
 .header {
   position: relative;
-  height: 60px;
+  height: 70px;
   display: flex;
   justify-content: space-between;
-  /* padding: 0 10px; */
   align-items: center;
 }
 
@@ -238,55 +224,85 @@ body {
   text-decoration: underline;
 }
 
-/* under header */
+/* home */
 .home-box {
   display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.home-image-container,
+.home-content-container {
+  flex: 1;
+}
+
+.home-image-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-image-container > img {
+  width: 490px;
+  height: auto;
+  display: block;
+}
+
+.home-content-container {
+  max-width: 55%;
+  display: flex;
   flex-direction: column;
+  gap: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 20px;
+  text-align: center;
 }
 
-.home-box > h1 {
-  font-family: "Unna", serif;
-  font-weight: 700;
-  color: #3b4261;
-  font-size: 42px;
-  margin: 0;
-}
-
-.home-box > h2 {
-  font-family: "Unna", serif;
+.home-text > h1 {
+  background: linear-gradient(to bottom, #9563c7 0%, #9f7ad8 55%, #442256 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 28px;
   font-weight: 400;
-  font-style: italic;
-  color: #537cf7;
-  font-size: 20px;
-  letter-spacing: 1px;
   margin: 0;
 }
 
-.p-wrapper {
-  max-width: 800px;
-  background-color: #b1c2fe;
-  padding: 30px 40px;
-  border-radius: 20px;
-  align-self: center;
+.home-text > h2 {
+  font-family: "Ribeye Marrow", serif;
+  font-weight: 400;
+  background: linear-gradient(to bottom, #9563c7 0%, #9f7ad8 55%, #442256 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 46px;
+  margin: 0 0 6px;
 }
 
-.p-wrapper > p {
-  color: #313340;
-  text-align: justify;
-  margin: 0;
-  letter-spacing: 1%;
-  line-height: auto;
+.home-text > span {
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 24px;
+  font-weight: normal;
 }
 
 .home-box button {
-  background-color: #4e7df4;
-  border-radius: 60px;
-  padding: 20px 30px;
+  background: linear-gradient(to bottom, #d6affe 0%, #9f7ad8 55%, #442256 100%);
+  border-radius: 30px;
+  width: 192px;
+  height: 75px;
   outline: none;
   border: none;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 26px;
   font-family: inherit;
   font-weight: inherit;
   color: white;
@@ -295,7 +311,10 @@ body {
 
 .main-content {
   position: relative;
-  margin: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px;
 }
 
 .loader-container {
@@ -310,15 +329,11 @@ body {
   justify-content: center;
 }
 
-.main-content {
-  text-align: center;
-}
-
 .main-content > h2 {
   font-family: "Unna", serif;
   font-weight: 700;
   color: #6586f8;
-  font-size: 30px;
+  font-size: 46px;
   margin: 0 0 30px;
 }
 

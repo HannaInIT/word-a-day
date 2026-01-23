@@ -4,7 +4,7 @@ import {
   CLASS_LOGO,
 } from "../constants.js";
 import { fetchWordInformation } from "../services/wordsService.js";
-import { initWelcomePage } from "../pages/welcomePage.js";
+import { initHomePage } from "../pages/homePage.js";
 import { initWordPage } from "../views/randomWordView.js";
 import { initRandomWordPage } from "../pages/randomWordPage.js";
 import { fetchWordImage } from "../services/imageService.js";
@@ -47,7 +47,7 @@ export function createHeader() {
   });
 
   const menuConfig = {
-    Welcome: initWelcomePage,
+    Home: initHomePage,
     "Random word": initRandomWordPage,
   };
 

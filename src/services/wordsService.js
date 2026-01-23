@@ -1,7 +1,7 @@
 export async function fetchWordInformation(word) {
   try {
     const response = await fetch(
-      `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`,
     );
     const responseData = await response.json();
 

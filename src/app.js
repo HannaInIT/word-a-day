@@ -1,8 +1,8 @@
-import { initWelcomePage } from "./pages/welcomePage.js";
+import { initHomePage } from "./pages/homePage.js";
 import { initMainLayout } from "./views/mainLayout.js";
 
 const loadApp = () => {
   initMainLayout();
-  initWelcomePage();
+  initHomePage();
 };
 window.addEventListener("load", loadApp);

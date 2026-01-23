@@ -7,7 +7,7 @@ export async function fetchWordImage(word) {
           Authorization:
             "Client-ID cWn8NA7LbX4dFyr50jHT2syLplZeI8cVwBSDtwSE8b4",
         },
-      }
+      },
     );
     const responseData = await response.json();
 

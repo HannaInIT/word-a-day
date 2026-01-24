@@ -1,10 +1,15 @@
 import { START_LEARNING_BUTTON_ID } from "../constants.js";
 
+/**
+ * Creates the About view container element.
+ * @returns {HTMLDivElement} The root element for the About view.
+ */
+
 export function createAboutElement() {
   const aboutContainer = document.createElement("div");
   aboutContainer.classList.add("about-box");
 
-  aboutContainer.innerHTML = `
+  aboutContainer.innerHTML = String.raw`
   <div class="about-image-container">
 <img src="./public/images/about_img.png" alt="about image" class="about-image"/>
   </div>

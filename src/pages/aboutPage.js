@@ -3,6 +3,7 @@ import { createAboutElement } from "../views/aboutView.js";
 import { startLearning } from "./homePage.js";
 
 export const initAboutPage = () => {
+  document.body.className = "";
   const mainContent = document.getElementById(MAIN_CONTENT_ID);
   mainContent.innerHTML = "";
   const aboutElement = createAboutElement();

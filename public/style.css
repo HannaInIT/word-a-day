@@ -227,10 +227,11 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
 .menu-link:hover {
-  text-decoration: underline;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 /* home */

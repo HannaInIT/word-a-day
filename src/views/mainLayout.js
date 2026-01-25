@@ -10,9 +10,9 @@ import { initWordPage } from "../views/randomWordView.js";
 import { initRandomWordPage } from "../pages/randomWordPage.js";
 import { fetchWordImage } from "../services/imageService.js";
 
-export function initMainLayout() {
+export function initMainLayout(currentPage = "Home") {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
-  const header = createHeader();
+  const header = createHeader(currentPage);
   userInterface.appendChild(header);
   const main = document.createElement("main");
   main.classList.add(MAIN_CONTENT_ID);
@@ -20,7 +20,7 @@ export function initMainLayout() {
   userInterface.appendChild(main);
 }
 
-export function createHeader() {
+export function createHeader(currentPage) {
   const header = document.createElement("header");
   header.classList.add("header");
 
@@ -28,6 +28,22 @@ export function createHeader() {
   logo.src = "/public/images/logo.svg";
   logo.alt = "Logo";
   logo.classList.add(CLASS_LOGO);
+  logo.addEventListener("click", () => {
+    // update active menu state: remove from all links and set Home as active
+    document.querySelectorAll(".menu-link").forEach((link) => {
+      link.classList.remove("active");
+      if (link.dataset.page === "Home") {
+        link.classList.add("active");
+      }
+    });
+
+    // clear main content before calling handler
+    const main = document.getElementById(MAIN_CONTENT_ID);
+    if (main) {
+      main.innerHTML = "";
+    }
+    initHomePage();
+  });
 
   header.appendChild(logo);
 
@@ -64,9 +80,25 @@ export function createHeader() {
     link.href = "#";
     link.textContent = title;
     link.classList.add("menu-link");
+    link.dataset.page = title;
+
+    // add active class if this is the current page
+    if (title === currentPage) {
+      link.classList.add("active");
+    }
 
     link.addEventListener("click", (e) => {
       e.preventDefault();
+
+      // Remove active class from all links
+      document
+        .querySelectorAll(".menu-link")
+        .forEach((l) => l.classList.remove("active"));
+      // Add active class to clicked link
+      link.classList.add("active");
+      // Clear main content and call handler
+      const main = document.getElementById(MAIN_CONTENT_ID);
+      main.innerHTML = "";
       handler();
     });
 

@@ -230,7 +230,7 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-.menu-link:hover {
+.menu-link:not(.active):hover {
   color: rgba(0, 0, 0, 0.6);
 }
 

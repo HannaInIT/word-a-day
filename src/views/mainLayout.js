@@ -36,6 +36,12 @@ export function createHeader(currentPage) {
         link.classList.add("active");
       }
     });
+
+    // clear main content before calling handler
+    const main = document.getElementById(MAIN_CONTENT_ID);
+    if (main) {
+      main.innerHTML = "";
+    }
     initHomePage();
   });
 

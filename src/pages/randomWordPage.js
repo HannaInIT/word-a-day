@@ -28,11 +28,24 @@ export function initLoader() {
   const loaderDiv = document.createElement("div");
   loaderDiv.classList.add("loader-container");
 
-  const loaderImg = document.createElement("img");
-  loaderImg.src = "/public/images/loader.png";
-  loaderImg.alt = "Loading...";
+  // Create the loader element
+  const loader = document.createElement("div");
+  loader.classList.add("loader");
 
-  loaderDiv.appendChild(loaderImg);
+  // Create SVG element
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("viewBox", "0 0 80 80");
+
+  // Create rectangle element
+  const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+  rect.setAttribute("x", "8");
+  rect.setAttribute("y", "8");
+  rect.setAttribute("width", "64");
+  rect.setAttribute("height", "64");
+
+  svg.appendChild(rect);
+  loader.appendChild(svg);
+  loaderDiv.appendChild(loader);
   userInterface.appendChild(loaderDiv);
 }
 

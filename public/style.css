@@ -225,40 +225,58 @@ body {
 }
 
 /* home */
-.home-box {
+.home-box,
+.about-box {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
 .home-image-container,
-.home-content-container {
+.home-content-container,
+.about-image-container,
+.about-content-container {
   flex: 1;
 }
 
-.home-image-container {
+.home-image-container,
+.about-image-container {
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.home-image-container > img {
-  width: 490px;
+.home-image-container > img,
+.about-image-container > img {
   height: auto;
   display: block;
 }
 
-.home-content-container {
+.home-image-container > img {
+  width: 490px;
+}
+
+.home-content-container,
+.about-content-container {
   max-width: 55%;
   display: flex;
   flex-direction: column;
-  gap: 100px;
   justify-content: center;
   align-items: center;
 }
 
-.home-text {
+/* specific gap values for each container */
+.home-content-container {
+  gap: 100px;
+}
+
+.about-content-container {
+  gap: 20px;
+}
+
+.home-text,
+.about-text {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -267,6 +285,7 @@ body {
   text-align: center;
 }
 
+.about-title,
 .home-text > h1 {
   background: linear-gradient(to bottom, #9563c7 0%, #9f7ad8 55%, #442256 100%);
   -webkit-background-clip: text;
@@ -288,13 +307,15 @@ body {
   margin: 0 0 6px;
 }
 
-.home-text > span {
+.home-text > span,
+.about-text > span {
   color: rgba(0, 0, 0, 0.4);
-  font-size: 24px;
+  font-size: 22px;
   font-weight: normal;
 }
 
-.home-box button {
+.home-box button,
+.start-learning-button {
   background: linear-gradient(to bottom, #d6affe 0%, #9f7ad8 55%, #442256 100%);
   border-radius: 30px;
   width: 192px;
@@ -314,7 +335,10 @@ body {
   text-align: center;
   display: flex;
   flex-direction: column;
-  padding: 0 30px;
+  justify-content: center;
+  align-items: center;
+  /* padding: 0 30px; */
+  flex: 1;
 }
 
 .loader-container {
@@ -482,4 +506,28 @@ body {
   .header {
     justify-content: center;
   }
+}
+
+/* about  */
+.about-image-container > img {
+  width: 380px;
+}
+
+.about-description {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 600px;
+  width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.about-description-item {
+  font-weight: normal;
+  font-size: 22px;
+  color: #606061;
+  text-align: left;
+  margin: 0;
+  text-indent: 1.5em;
 }

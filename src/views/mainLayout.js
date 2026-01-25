@@ -5,6 +5,7 @@ import {
 } from "../constants.js";
 import { fetchWordInformation } from "../services/wordsService.js";
 import { initHomePage } from "../pages/homePage.js";
+import { initAboutPage } from "../pages/aboutPage.js";
 import { initWordPage } from "../views/randomWordView.js";
 import { initRandomWordPage } from "../pages/randomWordPage.js";
 import { fetchWordImage } from "../services/imageService.js";
@@ -48,6 +49,7 @@ export function createHeader() {
 
   const menuConfig = {
     Home: initHomePage,
+    About: initAboutPage,
     "Random word": initRandomWordPage,
   };
 

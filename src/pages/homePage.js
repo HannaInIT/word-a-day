@@ -3,7 +3,7 @@ import { createHomeElement } from "../views/homeView.js";
 import { initRandomWordPage } from "./randomWordPage.js";
 
 export const initHomePage = () => {
-  document.body.className = "home-background";
+  document.body.className = "";
   const mainContent = document.getElementById(MAIN_CONTENT_ID);
   mainContent.innerHTML = "";
   const homeElement = createHomeElement();

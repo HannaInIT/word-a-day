@@ -179,6 +179,7 @@ body {
 .logo {
   width: 110px;
   height: auto;
+  cursor: pointer;
 }
 
 .search-input {
@@ -206,7 +207,7 @@ body {
 
 .menu-list {
   display: flex;
-  gap: 16px;
+  gap: 25px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -214,10 +215,18 @@ body {
 
 .menu-link {
   text-decoration: none;
-  color: #3b4261;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-size: 18px;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.menu-link.active {
+  background: linear-gradient(to bottom, #9563c7 0%, #9f7ad8 55%, #442256 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .menu-link:hover {
@@ -337,7 +346,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* padding: 0 30px; */
   flex: 1;
 }
 

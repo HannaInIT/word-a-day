@@ -20,7 +20,7 @@ export function initMainLayout() {
   userInterface.appendChild(main);
 }
 
-export function createHeader() {
+export function createHeader(currentPage = "Home") {
   const header = document.createElement("header");
   header.classList.add("header");
 
@@ -28,6 +28,20 @@ export function createHeader() {
   logo.src = "/public/images/logo.svg";
   logo.alt = "Logo";
   logo.classList.add(CLASS_LOGO);
+  logo.addEventListener("click", () => {
+    // remove active class from all links
+    document
+      .querySelectorAll(".menu-link")
+      .forEach((l) => l.classList.remove("active"));
+
+    // add active class to Home link
+    document.querySelectorAll(".menu-link").forEach((l) => {
+      if (l.textContent === "Home") {
+        l.classList.add("active");
+      }
+    });
+    initHomePage();
+  });
 
   header.appendChild(logo);
 
@@ -65,8 +79,20 @@ export function createHeader() {
     link.textContent = title;
     link.classList.add("menu-link");
 
+    // Add active class if this is the current page
+    if (title === currentPage) {
+      link.classList.add("active");
+    }
+
     link.addEventListener("click", (e) => {
       e.preventDefault();
+
+      // Remove active class from all links
+      document
+        .querySelectorAll(".menu-link")
+        .forEach((l) => l.classList.remove("active"));
+      // Add active class to clicked link
+      link.classList.add("active");
       handler();
     });
 

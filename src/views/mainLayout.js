@@ -10,9 +10,9 @@ import { initWordPage } from "../views/randomWordView.js";
 import { initRandomWordPage } from "../pages/randomWordPage.js";
 import { fetchWordImage } from "../services/imageService.js";
 
-export function initMainLayout() {
+export function initMainLayout(currentPage = "Home") {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
-  const header = createHeader();
+  const header = createHeader(currentPage);
   userInterface.appendChild(header);
   const main = document.createElement("main");
   main.classList.add(MAIN_CONTENT_ID);
@@ -20,7 +20,7 @@ export function initMainLayout() {
   userInterface.appendChild(main);
 }
 
-export function createHeader(currentPage = "Home") {
+export function createHeader(currentPage) {
   const header = document.createElement("header");
   header.classList.add("header");
 
@@ -32,7 +32,7 @@ export function createHeader(currentPage = "Home") {
     // update active menu state: remove from all links and set Home as active
     document.querySelectorAll(".menu-link").forEach((link) => {
       link.classList.remove("active");
-      if (link.textContent === "Home") {
+      if (link.dataset.page === "Home") {
         link.classList.add("active");
       }
     });
@@ -74,8 +74,9 @@ export function createHeader(currentPage = "Home") {
     link.href = "#";
     link.textContent = title;
     link.classList.add("menu-link");
+    link.dataset.page = title;
 
-    // Add active class if this is the current page
+    // add active class if this is the current page
     if (title === currentPage) {
       link.classList.add("active");
     }
@@ -89,6 +90,9 @@ export function createHeader(currentPage = "Home") {
         .forEach((l) => l.classList.remove("active"));
       // Add active class to clicked link
       link.classList.add("active");
+      // Clear main content and call handler
+      const main = document.getElementById(MAIN_CONTENT_ID);
+      main.innerHTML = "";
       handler();
     });
 

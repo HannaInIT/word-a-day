@@ -9,14 +9,14 @@ export const initAboutPage = () => {
   const aboutElement = createAboutElement();
   mainContent.appendChild(aboutElement);
 
-  // Use event delegation - attach to persistent parent element
-  mainContent.addEventListener(
-    "click",
-    (e) => {
-      if (e.target.id === START_LEARNING_BUTTON_ID) {
+  const startLearningButton = document.getElementById(START_LEARNING_BUTTON_ID);
+  if (startLearningButton) {
+    startLearningButton.addEventListener(
+      "click",
+      () => {
         startLearning();
-      }
-    },
-    { once: true },
-  ); // 'once' option removes listener after first use
+      },
+      { once: true },
+    ); // 'once' option removes listener after first use
+  }
 };

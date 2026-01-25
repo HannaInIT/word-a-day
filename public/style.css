@@ -399,7 +399,8 @@ body {
   stroke-linecap: round;
   stroke-dasharray: 192 64 192 64;
   stroke-dashoffset: 0;
-  animation: pathRect 3s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+  animation: pathRect var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86)
+    infinite;
 }
 
 @keyframes pathRect {

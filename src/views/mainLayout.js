@@ -29,15 +29,11 @@ export function createHeader(currentPage = "Home") {
   logo.alt = "Logo";
   logo.classList.add(CLASS_LOGO);
   logo.addEventListener("click", () => {
-    // remove active class from all links
-    document
-      .querySelectorAll(".menu-link")
-      .forEach((l) => l.classList.remove("active"));
-
-    // add active class to Home link
-    document.querySelectorAll(".menu-link").forEach((l) => {
-      if (l.textContent === "Home") {
-        l.classList.add("active");
+    // update active menu state: remove from all links and set Home as active
+    document.querySelectorAll(".menu-link").forEach((link) => {
+      link.classList.remove("active");
+      if (link.textContent === "Home") {
+        link.classList.add("active");
       }
     });
     initHomePage();

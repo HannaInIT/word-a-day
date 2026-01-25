@@ -24,11 +24,26 @@ export function createHeader(currentPage) {
   const header = document.createElement("header");
   header.classList.add("header");
 
+  // helper function to clear search input
+  const clearSearchInput = () => {
+    const searchInput = document.querySelector(".search-input");
+    const clearButton = document.querySelector(".search-clear");
+    if (searchInput) {
+      searchInput.value = "";
+    }
+    if (clearButton) {
+      clearButton.style.display = "none";
+    }
+  };
+
   const logo = document.createElement("img");
   logo.src = "/public/images/logo.svg";
-  logo.alt = "Logo";
+  logo.alt = "logo";
   logo.classList.add(CLASS_LOGO);
   logo.addEventListener("click", () => {
+    // clear search input
+    clearSearchInput();
+
     // update active menu state: remove from all links and set Home as active
     document.querySelectorAll(".menu-link").forEach((link) => {
       link.classList.remove("active");
@@ -48,20 +63,93 @@ export function createHeader(currentPage) {
   header.appendChild(logo);
 
   const searchInput = document.createElement("input");
-  header.appendChild(searchInput);
   searchInput.placeholder = "Search...";
   searchInput.classList.add("search-input");
   searchInput.name = "search";
-  searchInput.addEventListener("keydown", async (e) => {
-    if (e.key === "Enter") {
-      const wordInfo = await fetchWordInformation(searchInput.value);
 
-      const imageUrl = await fetchWordImage(wordInfo.word);
-      searchInput.value = "";
+  const clearButton = document.createElement("button");
+  clearButton.classList.add("search-clear");
+  clearButton.setAttribute("type", "button");
+  clearButton.style.display = "none";
 
-      initWordPage(wordInfo, imageUrl, true);
+  clearButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>`;
+
+  // event listener
+  searchInput.addEventListener("input", () => {
+    if (searchInput.value.length > 0) {
+      clearButton.style.display = "block";
+    } else {
+      clearButton.style.display = "none";
     }
   });
+
+  clearButton.addEventListener("click", () => {
+    searchInput.value = "";
+    clearButton.style.display = "none";
+    searchInput.focus();
+  });
+
+  // update the search event listener to hide clear button after search
+  searchInput.addEventListener("keydown", async (e) => {
+    if (e.key === "Enter") {
+      const searchTerm = searchInput.value.trim();
+
+      if (!searchTerm) {
+        return; // for empty strings
+      }
+
+      try {
+        const wordInfo = await fetchWordInformation(searchTerm);
+        const imageUrl = await fetchWordImage(wordInfo.word);
+        searchInput.value = "";
+        clearButton.style.display = "none";
+        initWordPage(wordInfo, imageUrl, true);
+      } catch (error) {
+        console.error("Search error:", error);
+
+        // error notification
+        showSearchError(`No results found.`);
+
+        // keep search term and focus for easy editing
+        searchInput.focus();
+        searchInput.select();
+      }
+    }
+  });
+
+  // helper function to show search error notification
+  const showSearchError = (message) => {
+    // remove existing error if any
+    const existingError = header.querySelector(".search-error");
+    if (existingError) {
+      existingError.remove();
+    }
+
+    // create error message element
+    const errorDiv = document.createElement("div");
+    errorDiv.classList.add("search-error");
+    errorDiv.textContent = message;
+
+    // insert after search container
+    searchContainer.parentNode.insertBefore(
+      errorDiv,
+      searchContainer.nextSibling,
+    );
+
+    // auto-hide after 5 seconds
+    setTimeout(() => {
+      if (errorDiv.parentNode) {
+        errorDiv.remove();
+      }
+    }, 5000);
+  };
+
+  // create search container and append both input and button
+  const searchContainer = document.createElement("div");
+  searchContainer.classList.add("search-container");
+  searchContainer.appendChild(searchInput);
+  searchContainer.appendChild(clearButton);
+  header.appendChild(searchContainer);
 
   const menuConfig = {
     Home: initHomePage,
@@ -90,13 +178,16 @@ export function createHeader(currentPage) {
     link.addEventListener("click", (e) => {
       e.preventDefault();
 
-      // Remove active class from all links
+      // clear search input
+      clearSearchInput();
+
+      // remove active class from all links
       document
         .querySelectorAll(".menu-link")
         .forEach((l) => l.classList.remove("active"));
-      // Add active class to clicked link
+      // add active class to clicked link
       link.classList.add("active");
-      // Clear main content and call handler
+      // clear main content and call handler
       const main = document.getElementById(MAIN_CONTENT_ID);
       main.innerHTML = "";
       handler();

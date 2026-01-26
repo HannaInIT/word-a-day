@@ -3,11 +3,20 @@ export async function fetchWordInformation(word) {
     const response = await fetch(
       `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`,
     );
-    const responseData = await response.json();
 
+    if (response.status === 404) {
+      return null; // Word not found - UI handles this
+    }
+
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status} ${response.statusText}`);
+    }
+
+    const responseData = await response.json();
     return responseData[0];
   } catch (error) {
-    console.log(error);
+    if (error.message.includes("API error:")) throw error;
+    throw new Error("Network error occurred");
   }
 }
 

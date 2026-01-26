@@ -70,6 +70,7 @@ export function createHeader(currentPage) {
   const clearButton = document.createElement("button");
   clearButton.classList.add("search-clear");
   clearButton.setAttribute("type", "button");
+  clearButton.setAttribute("aria-label", "Clear search");
   clearButton.style.display = "none";
 
   clearButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>`;
@@ -77,7 +78,7 @@ export function createHeader(currentPage) {
   // event listener
   searchInput.addEventListener("input", () => {
     if (searchInput.value.length > 0) {
-      clearButton.style.display = "block";
+      clearButton.style.display = "flex";
     } else {
       clearButton.style.display = "none";
     }
@@ -100,17 +101,25 @@ export function createHeader(currentPage) {
 
       try {
         const wordInfo = await fetchWordInformation(searchTerm);
+
+        // here
+        if (!wordInfo) {
+          showSearchError(
+            `Word "${searchTerm}" not found. Please try a different word.`,
+          );
+          searchInput.focus();
+          searchInput.select();
+          return;
+        }
+
         const imageUrl = await fetchWordImage(wordInfo.word);
         searchInput.value = "";
         clearButton.style.display = "none";
         initWordPage(wordInfo, imageUrl, true);
       } catch (error) {
-        console.error("Search error:", error);
-
-        // error notification
-        showSearchError(`No results found.`);
-
-        // keep search term and focus for easy editing
+        showSearchError(
+          "Service temporarily unavailable. Please try again later.",
+        );
         searchInput.focus();
         searchInput.select();
       }

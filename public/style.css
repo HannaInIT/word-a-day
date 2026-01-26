@@ -260,9 +260,10 @@ body {
   left: 50%;
   transform: translateX(-50%);
   margin-top: 5px;
-  width: 170px;
-  height: 60px;
+  width: 250px;
   max-width: 80%;
+  height: auto;
+  min-height: 60px;
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -276,6 +277,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
   z-index: 10;
 }
 
@@ -306,52 +310,6 @@ body {
 
 .menu-link:not(.active):hover {
   color: rgba(0, 0, 0, 0.6);
-}
-
-/* error message*/
-.error-message {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: 40px;
-  text-align: center;
-}
-
-.error-message h2 {
-  background: linear-gradient(to bottom, #9563c7 0%, #9f7ad8 55%, #442256 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  font-size: 32px;
-  margin: 0;
-}
-
-.error-message p {
-  color: rgba(0, 0, 0, 0.6);
-  font-size: 20px;
-  margin: 0;
-  max-width: 500px;
-}
-
-.try-again-btn {
-  background: linear-gradient(to bottom, #d6affe 0%, #9f7ad8 55%, #442256 100%);
-  border-radius: 30px;
-  padding: 15px 30px;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  font-family: inherit;
-  font-weight: inherit;
-  color: white;
-  transition: transform 0.2s ease;
-}
-
-.try-again-btn:hover {
-  transform: translateY(-2px);
 }
 
 /* home */

@@ -24,49 +24,19 @@ export function createHeader(currentPage) {
   const header = document.createElement("header");
   header.classList.add("header");
 
-  // helper function to clear search input
-  const clearSearchInput = () => {
-    const searchInput = document.querySelector(".search-input");
-    const clearButton = document.querySelector(".search-clear");
-    if (searchInput) {
-      searchInput.value = "";
-    }
-    if (clearButton) {
-      clearButton.style.display = "none";
-    }
-  };
-
+  // logo
   const logo = document.createElement("img");
   logo.src = "/public/images/logo.svg";
   logo.alt = "logo";
   logo.classList.add(CLASS_LOGO);
-  logo.addEventListener("click", () => {
-    // clear search input
-    clearSearchInput();
 
-    // update active menu state: remove from all links and set Home as active
-    document.querySelectorAll(".menu-link").forEach((link) => {
-      link.classList.remove("active");
-      if (link.dataset.page === "Home") {
-        link.classList.add("active");
-      }
-    });
-
-    // clear main content before calling handler
-    const main = document.getElementById(MAIN_CONTENT_ID);
-    if (main) {
-      main.innerHTML = "";
-    }
-    initHomePage();
-  });
-
-  header.appendChild(logo);
-
+  // search input
   const searchInput = document.createElement("input");
-  searchInput.placeholder = "Search...";
   searchInput.classList.add("search-input");
   searchInput.name = "search";
+  searchInput.placeholder = "Search...";
 
+  // clear button
   const clearButton = document.createElement("button");
   clearButton.classList.add("search-clear");
   clearButton.setAttribute("type", "button");
@@ -75,19 +45,29 @@ export function createHeader(currentPage) {
 
   clearButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>`;
 
-  // event listener
+  // helper function to clear search input
+  const clearSearchInput = () => {
+    searchInput.value = "";
+    clearButton.style.display = "none";
+  };
+
+  // create search container and append both input and button
+  const searchContainer = document.createElement("div");
+  searchContainer.classList.add("search-container");
+  searchContainer.appendChild(searchInput);
+  searchContainer.appendChild(clearButton);
+
+  // append logo and search to header
+  header.appendChild(logo);
+  header.appendChild(searchContainer);
+
+  // search input events
   searchInput.addEventListener("input", () => {
     if (searchInput.value.length > 0) {
       clearButton.style.display = "flex";
     } else {
       clearButton.style.display = "none";
     }
-  });
-
-  clearButton.addEventListener("click", () => {
-    searchInput.value = "";
-    clearButton.style.display = "none";
-    searchInput.focus();
   });
 
   // update the search event listener to hide clear button after search
@@ -113,8 +93,8 @@ export function createHeader(currentPage) {
         }
 
         const imageUrl = await fetchWordImage(wordInfo.word);
-        searchInput.value = "";
-        clearButton.style.display = "none";
+
+        clearSearchInput();
         initWordPage(wordInfo, imageUrl, true);
       } catch (error) {
         showSearchError(
@@ -126,7 +106,12 @@ export function createHeader(currentPage) {
     }
   });
 
-  // helper function to show search error notification
+  clearButton.addEventListener("click", () => {
+    clearSearchInput();
+    searchInput.focus();
+  });
+
+  // search error helper to show search error notification
   const showSearchError = (message) => {
     // remove existing error if any
     const existingError = header.querySelector(".search-error");
@@ -153,13 +138,26 @@ export function createHeader(currentPage) {
     }, 5000);
   };
 
-  // create search container and append both input and button
-  const searchContainer = document.createElement("div");
-  searchContainer.classList.add("search-container");
-  searchContainer.appendChild(searchInput);
-  searchContainer.appendChild(clearButton);
-  header.appendChild(searchContainer);
+  // logo click
+  logo.addEventListener("click", () => {
+    clearSearchInput();
 
+    document.querySelectorAll(".menu-link").forEach((link) => {
+      link.classList.remove("active");
+      if (link.dataset.page === "Home") {
+        link.classList.add("active");
+      }
+    });
+
+    // clear main content before calling handler
+    const main = document.getElementById(MAIN_CONTENT_ID);
+    if (main) {
+      main.innerHTML = "";
+    }
+    initHomePage();
+  });
+
+  // menu
   const menuConfig = {
     Home: initHomePage,
     About: initAboutPage,

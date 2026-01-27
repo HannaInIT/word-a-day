@@ -18,3 +18,4 @@ export const CLASS_ABOUT_TITLE = "about-title";
 export const CLASS_ABOUT_DESCRIPTION = "about-description";
 export const CLASS_ABOUT_DESCRIPTION_ITEM = "about-description-item";
 export const CLASS_START_LEARNING_BUTTON = "start-learning-button";
+export const CLASS_WORD_IMAGE = "word-image";

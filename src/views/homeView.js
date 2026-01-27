@@ -24,7 +24,7 @@ export const createHomeElement = () => {
     <span>through daily word discovery</span>
    </div>
    
-    <button id="${START_LEARNING_BUTTON_ID}">START</button>
+    <button id="${START_LEARNING_BUTTON_ID}">Start</button>
     </div>
  
 

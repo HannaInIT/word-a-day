@@ -33,7 +33,7 @@ export function createAboutElement() {
       </div>
     </div>
     
-    <button id="${START_LEARNING_BUTTON_ID}" class="${CLASS_START_LEARNING_BUTTON}">START</button>
+    <button id="${START_LEARNING_BUTTON_ID}" class="${CLASS_START_LEARNING_BUTTON}">Start</button>
   </div>
   `;
 

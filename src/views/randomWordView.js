@@ -2,6 +2,36 @@ import { MAIN_CONTENT_ID, CLASS_NEXT_WORD_WRAPPER } from "../constants.js";
 import { initRandomWordPage } from "../pages/randomWordPage.js";
 
 /**
+ * Splits text into individual sentences.
+ * @param {string} text - Text to split into sentences.
+ * @returns {string[]} An array of sentences.
+ */
+function splitIntoSentences(text) {
+  if (!text) return [];
+
+  // Clean up text and split by sentence-ending punctuation
+  const cleaned = text.trim().replace(/\s+/g, " ");
+
+  // Split by periods, semicolons, question marks, exclamation marks, or commas
+  const phrases = cleaned.split(/[.;!?,]+/);
+
+  return phrases
+    .map((phrase) => phrase.trim())
+    .filter((phrase) => phrase.length > 0)
+    .map((phrase) => capitalizeFirstLetter(phrase));
+}
+
+/**
+ * Capitalizes the first letter of a string.
+ * @param {string} str - String to capitalize.
+ * @returns {string} String with first letter capitalized.
+ */
+function capitalizeFirstLetter(str) {
+  if (!str) return "";
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+/**
  * Extracts up to three example sentences from the meanings array.
  * @param {Array} meanings - Array of meanings from the dictionary API response.
  * @returns {string[]} An array of example sentences (maximum of 3).
@@ -12,7 +42,9 @@ export function extractExamplesFromWordData(meanings) {
   for (const meaning of meanings) {
     meaning.definitions.forEach((definition) => {
       if (definition.example) {
-        examples.push(definition.example);
+        // Split each example into individual sentences
+        const sentences = splitIntoSentences(definition.example);
+        examples.push(...sentences);
       }
     });
   }
@@ -55,7 +87,7 @@ export function initWordPage(wordData, wordImage, isSearchPage) {
               ? `
               <audio id="audio-player" class="hidden-audio" src="${wordAudio}" controls></audio>
               <button class="speaker-icon" onclick="document.getElementById('audio-player').play()">
-              <img src="/public/images/speaker.svg" alt="play pronunciation" />
+                <img src="/public/images/speaker.svg" alt="play pronunciation" />
               </button>
               `
               : ""

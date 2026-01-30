@@ -59,8 +59,8 @@ export function extractExamplesFromWordData(meanings) {
  */
 export function initWordPage(wordData, wordImage, isSearchPage) {
   const main = document.getElementById(MAIN_CONTENT_ID);
-  const wordTranscription = wordData.phonetics.find((p) => p.text).text;
-  const wordAudio = wordData.phonetics.find((p) => p.audio).audio;
+  const wordTranscription = wordData.phonetics?.find((p) => p.text)?.text || "";
+  const wordAudio = wordData.phonetics?.find((p) => p.audio)?.audio || "";
 
   const mainWordMeaning = wordData.meanings[0];
 

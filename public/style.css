@@ -578,27 +578,19 @@ body {
   padding: 15px 25px;
   border-radius: 7px;
   text-align: left;
-
   flex: 1;
   overflow-y: auto;
   max-height: 100px;
-
   padding: 10px 14px;
-  /* background: rgba(255,255,255,0.85); */
   border-radius: 6px;
-  /* box-shadow: 0 1px 4px rgba(0,0,0,0.04); */
-  /* font-size: 17px; */
-  /* line-height: 1.6; */
-  /* border: 1px solid #e0d7f3; */
-  scrollbar-width: thin; /* Firefox */
-  scrollbar-color: #b3a1d8 #f5f5fa; /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #b3a1d8 #f5f5fa;
 }
 
 /* For Webkit browsers */
 .selector::-webkit-scrollbar {
   height: 8px;
   width: 8px;
-  /* background: #f5f5fa; */
 }
 .selector::-webkit-scrollbar-thumb {
   background: #b3a1d8;

@@ -11,8 +11,13 @@ export async function fetchWordImage(word) {
     );
     const responseData = await response.json();
 
-    return responseData.results[0].urls.full;
+    // Use optional chaining and fallback
+    return (
+      responseData.results?.[0]?.urls?.full ||
+      "/public/images/fallback-image.svg"
+    );
   } catch (error) {
     console.log(error);
+    return "/public/images/fallback-image.svg";
   }
 }

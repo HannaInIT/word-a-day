@@ -1,0 +1,55 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradient background -->
+  <defs>
+    <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#d6affe;stop-opacity:1" />
+      <stop offset="55%" style="stop-color:#9f7ad8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#442256;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Subtle overlay gradient for depth -->
+    <radialGradient id="overlay" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0.05" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#purpleGradient)"/>
+  <rect width="800" height="600" fill="url(#overlay)"/>
+  
+  <!-- Decorative geometric shapes with opacity -->
+  <circle cx="150" cy="120" r="80" fill="#ffffff" opacity="0.08"/>
+  <circle cx="680" cy="480" r="100" fill="#ffffff" opacity="0.06"/>
+  <circle cx="400" cy="300" r="150" fill="#ffffff" opacity="0.04"/>
+  
+  <!-- Central icon - Book with letter 'A' -->
+  <g transform="translate(400, 300)">
+    <!-- Book outline -->
+    <path d="M -60 -50 L -60 50 Q -60 55 -55 55 L 55 55 Q 60 55 60 50 L 60 -50 Q 60 -55 55 -55 L -55 -55 Q -60 -55 -60 -50 Z" 
+          fill="none" 
+          stroke="#ffffff" 
+          stroke-width="3" 
+          opacity="0.4"/>
+    
+    <!-- Book pages detail -->
+    <line x1="-40" y1="-55" x2="-40" y2="55" stroke="#ffffff" stroke-width="2" opacity="0.25"/>
+    
+    <!-- Letter 'A' -->
+    <text x="0" y="20" 
+          font-family="Arial, sans-serif" 
+          font-size="70" 
+          font-weight="bold" 
+          fill="#ffffff" 
+          opacity="0.35" 
+          text-anchor="middle">A</text>
+  </g>
+  
+  <!-- Optional: Subtle text at bottom -->
+  <text x="400" y="520" 
+        font-family="Arial, sans-serif" 
+        font-size="18" 
+        fill="#ffffff" 
+        opacity="0.3" 
+        text-anchor="middle">Image not available</text>
+</svg>

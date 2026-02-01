@@ -636,6 +636,11 @@ body {
   text-align: left;
 }
 
+.empty-state {
+  text-align: left;
+  color: #888888;
+}
+
 .next-word-wrapper {
   width: 100%;
   display: flex;

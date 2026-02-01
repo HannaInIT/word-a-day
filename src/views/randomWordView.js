@@ -97,13 +97,15 @@ export function initWordPage(wordData, wordImage, isSearchPage) {
         <div class="word-info">
           <div class="word-meaning-container">
             ${wordData.word} (${mainWordMeaning.partOfSpeech}) - ${mainWordMeaning.definitions[0].definition}
-          </div>
+          </div>         
 
           <div class="examples-container">
             <p>Examples</p>
-            <ol class="examples-list">
-              ${examplesListHtml}
-            </ol>
+            ${
+              wordExamples.length > 0
+                ? `<ol class="examples-list">${examplesListHtml}</ol>`
+                : `<p class="empty-state">Examples are not available yet.</p>`
+            }
           </div>
         </div>
       </div>

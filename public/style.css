@@ -313,13 +313,12 @@ body {
 
 .word-container {
   display: flex;
-  /* justify-content: space-between; */
   width: 100%;
   max-height: 50vh;
-  /* align-items: stretch; */
-
   align-items: flex-start;
   gap: 1rem;
+  flex: 1;
+  padding: 20px;
 }
 
 .home-image-container,
@@ -347,12 +346,19 @@ body {
 }
 
 .random-content-container {
+  display: flex;
+  flex-direction: column;
   padding: 20px;
   height: 100%;
   width: 55%;
+  flex: 1;
+  min-height: 400px;
+}
+
+.random-content-container .content-wrapper {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .random-image-container {
@@ -587,7 +593,7 @@ body {
   scrollbar-color: #b3a1d8 #f5f5fa;
 }
 
-/* For Webkit browsers */
+/* for webkit browsers */
 .selector::-webkit-scrollbar {
   height: 8px;
   width: 8px;

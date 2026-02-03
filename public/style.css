@@ -603,12 +603,6 @@ body {
   border-radius: 4px;
 }
 
-.examples-container > ol {
-  flex: 1;
-  overflow-y: auto;
-  max-height: 150px;
-}
-
 .hidden-audio {
   opacity: 0;
   width: 0;
@@ -640,6 +634,10 @@ body {
   flex-direction: column;
   transition: all 0.2s ease;
   text-align: left;
+  overflow-y: auto;
+  max-height: 100px;
+  scrollbar-width: thin;
+  scrollbar-color: #b3a1d8 #f5f5fa;
 }
 
 .empty-state {

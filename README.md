@@ -2,6 +2,8 @@
 
 > _Learn English vocabulary one word at a time_
 
+This project is under active development. The deployed version is currently not available.
+
 [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Visit_Site-success?style=for-the-badge)](https://word-a-day-app.netlify.app/)
 
 A simple and interactive web application designed to help users learn and practice English vocabulary through daily word discovery. Built with vanilla JavaScript and powered by modern APIs for dynamic, engaging content.

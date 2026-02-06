@@ -341,28 +341,12 @@ body {
   justify-content: center;
 }
 
-.home-image-container > img,
-.about-image-container > img {
+.home-image-container img,
+.about-image-container img {
   width: 490px;
   height: auto;
-}
-
-.random-content-container {
-  display: flex;
-  flex-direction: column;
-  padding-top: 20px;
-  flex: 1;
-  gap: 20px;
-}
-
-.random-image-container {
-  flex: 1;
-  min-width: 0;
-  max-height: 450px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  object-fit: contain;
+  border-radius: 7px;
 }
 
 .random-image-container img {
@@ -380,6 +364,14 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.random-content-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  flex: 1;
+  gap: 20px;
 }
 
 /* specific gap values for each container */
@@ -402,8 +394,8 @@ body {
 }
 
 .about-title,
-.home-text > h1,
-.main-content > h2 {
+.home-text h1,
+.main-content h2 {
   background: linear-gradient(to bottom, #9563c7 0%, #9f7ad8 55%, #442256 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -413,7 +405,7 @@ body {
   margin: 0;
 }
 
-.main-content > h2 {
+.main-content h2 {
   margin-bottom: 30px;
 }
 
@@ -423,7 +415,7 @@ body {
   gap: 10px;
 }
 
-.home-text > h2 {
+.home-text h2 {
   font-family: "Ribeye Marrow", serif;
   font-weight: 400;
   background: linear-gradient(to bottom, #9563c7 0%, #9f7ad8 55%, #442256 100%);
@@ -434,8 +426,8 @@ body {
   margin: 0 0 6px;
 }
 
-.home-text > span,
-.about-text > span {
+.home-text span,
+.about-text span {
   color: rgba(0, 0, 0, 0.4);
   font-size: 22px;
   font-weight: normal;
@@ -569,7 +561,7 @@ body {
   gap: 20px;
 }
 
-.pronunciation-wrapper > p {
+.pronunciation-wrapper p {
   margin: 0;
 }
 
@@ -686,7 +678,7 @@ body {
 }
 
 /* about  */
-.about-image-container > img {
+.about-image-container img {
   width: 380px;
 }
 

@@ -343,7 +343,8 @@ body {
 
 .home-image-container img,
 .about-image-container img {
-  width: 490px;
+  width: 100%;
+  max-width: min(400px, 50vw - 60px);
   height: auto;
   object-fit: contain;
   border-radius: 7px;
@@ -644,6 +645,11 @@ body {
     gap: 10px;
   }
 
+  .home-image-container img,
+  .about-image-container img {
+    max-width: 100%;
+  }
+
   .word-img {
     object-fit: contain;
     width: 100%;
@@ -678,10 +684,6 @@ body {
 }
 
 /* about  */
-.about-image-container img {
-  width: 380px;
-}
-
 .about-description {
   display: flex;
   flex-direction: column;

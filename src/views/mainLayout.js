@@ -54,11 +54,20 @@ export function createHeader(currentPage) {
 
   searchButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M9.539 15.23q-2.398 0-4.065-1.666Q3.808 11.899 3.808 9.5t1.666-4.065T9.539 3.77t4.064 1.666T15.269 9.5q0 1.042-.369 2.017t-.97 1.668l5.909 5.907q.14.14.15.345q.009.203-.15.363q-.16.16-.354.16t-.354-.16l-5.908-5.908q-.75.639-1.725.989t-1.96.35m0-1q1.99 0 3.361-1.37q1.37-1.37 1.37-3.361T12.9 6.14T9.54 4.77q-1.991 0-3.361 1.37T4.808 9.5t1.37 3.36t3.36 1.37"/></svg>`;
 
+  // helper function to clear search error
+  const clearSearchError = () => {
+    const existingError = header.querySelector(".search-error");
+    if (existingError) {
+      existingError.remove();
+    }
+  };
+
   // helper function to clear search input
   const clearSearchInput = () => {
     searchInput.value = "";
     clearButton.style.display = "none";
     searchButton.style.display = "none";
+    clearSearchError();
   };
 
   // run search function
@@ -68,6 +77,9 @@ export function createHeader(currentPage) {
     if (!searchTerm) {
       return; // for empty strings
     }
+
+    // clear any previous error messages
+    clearSearchError();
 
     try {
       const wordInfo = await fetchWordInformation(searchTerm);
@@ -107,7 +119,7 @@ export function createHeader(currentPage) {
 
   // search input events
   searchInput.addEventListener("input", () => {
-    if (searchInput.value.length > 0) {
+    if (searchInput.value.trim().length > 0) {
       clearButton.style.display = "flex";
       searchButton.style.display = "flex";
     } else {
@@ -137,10 +149,7 @@ export function createHeader(currentPage) {
   // search error helper to show search error notification
   const showSearchError = (message) => {
     // remove existing error if any
-    const existingError = header.querySelector(".search-error");
-    if (existingError) {
-      existingError.remove();
-    }
+    clearSearchError();
 
     // create error message element
     const errorDiv = document.createElement("div");

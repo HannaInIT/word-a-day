@@ -45,10 +45,65 @@ export function createHeader(currentPage) {
 
   clearButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>`;
 
+  // search button
+  const searchButton = document.createElement("button");
+  searchButton.classList.add("start-search");
+  searchButton.setAttribute("type", "button");
+  searchButton.setAttribute("aria-label", "Start search");
+  searchButton.style.display = "none";
+
+  searchButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M9.539 15.23q-2.398 0-4.065-1.666Q3.808 11.899 3.808 9.5t1.666-4.065T9.539 3.77t4.064 1.666T15.269 9.5q0 1.042-.369 2.017t-.97 1.668l5.909 5.907q.14.14.15.345q.009.203-.15.363q-.16.16-.354.16t-.354-.16l-5.908-5.908q-.75.639-1.725.989t-1.96.35m0-1q1.99 0 3.361-1.37q1.37-1.37 1.37-3.361T12.9 6.14T9.54 4.77q-1.991 0-3.361 1.37T4.808 9.5t1.37 3.36t3.36 1.37"/></svg>`;
+
+  // helper function to clear search error
+  const clearSearchError = () => {
+    const existingError = header.querySelector(".search-error");
+    if (existingError) {
+      existingError.remove();
+    }
+  };
+
   // helper function to clear search input
   const clearSearchInput = () => {
     searchInput.value = "";
     clearButton.style.display = "none";
+    searchButton.style.display = "none";
+    clearSearchError();
+  };
+
+  // run search function
+  const runSearch = async () => {
+    const searchTerm = searchInput.value.trim();
+
+    if (!searchTerm) {
+      return; // for empty strings
+    }
+
+    // clear any previous error messages
+    clearSearchError();
+
+    try {
+      const wordInfo = await fetchWordInformation(searchTerm);
+
+      if (!wordInfo) {
+        showSearchError(
+          `Word "${searchTerm}" not found. Please try a different word.`,
+        );
+        searchInput.focus();
+        searchInput.select();
+        return;
+      }
+
+      const imageUrl = await fetchWordImage(wordInfo.word);
+
+      clearSearchInput();
+      initWordPage(wordInfo, imageUrl, true);
+    } catch (error) {
+      showSearchError(
+        "Service temporarily unavailable. Please try again later.",
+      );
+      searchInput.focus();
+      searchInput.select();
+    }
   };
 
   // create search container and append both input and button
@@ -56,6 +111,7 @@ export function createHeader(currentPage) {
   searchContainer.classList.add("search-container");
   searchContainer.appendChild(searchInput);
   searchContainer.appendChild(clearButton);
+  searchContainer.appendChild(searchButton);
 
   // append logo and search to header
   header.appendChild(logo);
@@ -63,49 +119,28 @@ export function createHeader(currentPage) {
 
   // search input events
   searchInput.addEventListener("input", () => {
-    if (searchInput.value.length > 0) {
+    if (searchInput.value.trim().length > 0) {
       clearButton.style.display = "flex";
+      searchButton.style.display = "flex";
     } else {
       clearButton.style.display = "none";
+      searchButton.style.display = "none";
     }
   });
 
-  // update the search event listener to hide clear button after search
+  // search on Enter key
   searchInput.addEventListener("keydown", async (e) => {
     if (e.key === "Enter") {
-      const searchTerm = searchInput.value.trim();
-
-      if (!searchTerm) {
-        return; // for empty strings
-      }
-
-      try {
-        const wordInfo = await fetchWordInformation(searchTerm);
-
-        // here
-        if (!wordInfo) {
-          showSearchError(
-            `Word "${searchTerm}" not found. Please try a different word.`,
-          );
-          searchInput.focus();
-          searchInput.select();
-          return;
-        }
-
-        const imageUrl = await fetchWordImage(wordInfo.word);
-
-        clearSearchInput();
-        initWordPage(wordInfo, imageUrl, true);
-      } catch (error) {
-        showSearchError(
-          "Service temporarily unavailable. Please try again later.",
-        );
-        searchInput.focus();
-        searchInput.select();
-      }
+      await runSearch();
     }
   });
 
+  // search button click
+  searchButton.addEventListener("click", async () => {
+    await runSearch();
+  });
+
+  // clear button click
   clearButton.addEventListener("click", () => {
     clearSearchInput();
     searchInput.focus();
@@ -114,10 +149,7 @@ export function createHeader(currentPage) {
   // search error helper to show search error notification
   const showSearchError = (message) => {
     // remove existing error if any
-    const existingError = header.querySelector(".search-error");
-    if (existingError) {
-      existingError.remove();
-    }
+    clearSearchError();
 
     // create error message element
     const errorDiv = document.createElement("div");

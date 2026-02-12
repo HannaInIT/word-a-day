@@ -72,10 +72,8 @@ export function initWordPage(wordData, wordImage, isSearchPage) {
 
   main.innerHTML = String.raw`
   <h2>${isSearchPage ? "Search result" : "Random word"}</h2>
-  <div class="word-container">
-    <div class="random-image-container">
-      <img src="${wordImage}" class="word-img" loading="lazy"/>
-    </div>
+  <div class="word-container">   
+      <img src="${wordImage}" class="word-img" loading="lazy"/>     
 
     <div class="random-content-container">
       <div class="content-wrapper">

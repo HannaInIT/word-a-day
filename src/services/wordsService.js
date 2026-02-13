@@ -1,24 +1,32 @@
 export async function fetchWordInformation(word) {
   try {
     const response = await fetch(
-      `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`,
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
     );
 
-    if (response.status === 404) {
-      return null; // Word not found - UI handles this
+    if (response.status === 404) return null;
+    if (response.status === 429) {
+      console.warn("Dictionary API rate limit");
+      return null;
     }
 
-    if (!response.ok) {
-      throw new Error(`API error: ${response.status} ${response.statusText}`);
+    const text = await response.text();
+
+    // not a JSON
+    if (!text.trim().startsWith("{") && !text.trim().startsWith("[")) {
+      console.warn("Non-JSON response:", text);
+      return null;
     }
 
-    const responseData = await response.json();
-    return responseData[0];
+    const data = JSON.parse(text);
+    return data[0] ?? null;
+
   } catch (error) {
-    if (error.message.includes("API error:")) throw error;
-    throw new Error("Network error occurred");
+    console.error("Dictionary fetch failed:", error);
+    return null;
   }
 }
+
 
 export async function getRandomWordInformation() {
   let englishWordsData = null;
